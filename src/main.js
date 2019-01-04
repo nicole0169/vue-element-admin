@@ -27,11 +27,11 @@ Vue.use(Element, {
 })
 
 // register global utility filters.
-Object.keys(filters).forEach(key => {
+/*Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
-})
+})*/
 
-Vue.config.productionTip = false
+//Vue.config.productionTip = false
 
 new Vue({
   el: '#app',

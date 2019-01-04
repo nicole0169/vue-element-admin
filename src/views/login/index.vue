@@ -125,7 +125,10 @@ export default {
       }
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate((valid,errItem)=> {
+        console.log('Login console: ')
+        console.log(valid)
+        console.log(errItem)
         if (valid) {
           this.loading = true
           this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
