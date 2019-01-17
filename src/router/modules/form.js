@@ -2,7 +2,7 @@ import Layout from '@/views/layout/Layout'
 
 const formRouter = {
   path: '/form',
-  Component: Layout,
+  component: Layout,
   redirect: '/form/complex-form',
   meta: {
     title: 'Form',
