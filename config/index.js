@@ -21,6 +21,10 @@ module.exports = {
       '/user': {
         target: 'http://localhost:8080',
         changeOrigin: true
+      },
+      '/transaction': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
       }
     },
 
