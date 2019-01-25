@@ -38,6 +38,9 @@
           <el-radio label="线下场地免费"></el-radio>
         </el-radio-group>
       </el-form-item>
+      <el-form-item label="活动省市">
+        <china-areas-select v-model="simpleForm.area"></china-areas-select>
+      </el-form-item>
       <el-form-item label="活动形式">
         <el-input type="textarea" v-model="simpleForm.desc"></el-input>
       </el-form-item>
@@ -51,9 +54,11 @@
 
 <script>
   import {submitSimpleForm} from '@/api/form'
+  import ChinaAreasSelect from '@/components/ChinaAreasSelect'
 
   export default {
     name: 'SimpleForm',
+    components: {ChinaAreasSelect},
     data() {
       return {
         simpleForm: {
@@ -64,7 +69,8 @@
           delivery: false,
           type: [],
           resource: '',
-          desc: ''
+          desc: '',
+          area: ''
         },
         loading: false,
         rules: {

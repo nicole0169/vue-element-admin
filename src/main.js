@@ -38,5 +38,8 @@ new Vue({
   router,
   store,
   i18n,
+  data: {
+    bus: new Vue()
+  },
   render: h => h(App)
 })
