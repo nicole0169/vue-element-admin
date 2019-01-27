@@ -26,6 +26,14 @@ const formRouter = {
       meta: {
         title: 'complexForm'
       }
+    },
+    {
+      path: 'custom-components-form',
+      component: () => import('@/views/form/customComponentsForm/index'),
+      name: 'CustomComponentsForm',
+      meta: {
+        title: 'customComponentsForm'
+      }
     }
   ]
 }

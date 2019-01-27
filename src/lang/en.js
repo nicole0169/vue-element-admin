@@ -48,6 +48,7 @@ export default {
     form: 'Form',
     simpleForm: 'Simple Form',
     complexForm: 'Complex Form',
+    customComponentsForm: 'Custom Form',
     createArticle: 'Create Article',
     editArticle: 'Edit Article',
     articleList: 'Article List',
