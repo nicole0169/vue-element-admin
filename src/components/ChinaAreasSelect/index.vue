@@ -76,7 +76,6 @@ export default {
         this.inputArea = ''
         this.areas = AREAS[item]
       }
-      this.$root.bus.$emit('province_code', item)
       this.$emit('handleSelect', item)
     },
     loadAll() {

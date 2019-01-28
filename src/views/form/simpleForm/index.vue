@@ -44,6 +44,9 @@
       <el-form-item label="活动形式">
         <el-input type="textarea" v-model="simpleForm.desc"></el-input>
       </el-form-item>
+      <el-form-item label="所在省市">
+        <china-areas-select v-model="simpleForm.area2"></china-areas-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" @click.native.prevent="handleSimpleForm('simpleForm')">立即创建</el-button>
         <el-button>取消</el-button>
@@ -70,7 +73,8 @@
           type: [],
           resource: '',
           desc: '',
-          area: ''
+          area: '',
+          area2: ''
         },
         loading: false,
         rules: {

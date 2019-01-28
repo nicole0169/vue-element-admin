@@ -43,7 +43,7 @@ export default {
   methods: {
     handleSelect(item) {
       console.log(item)
-      this.$emit('input', item)
+      this.$emit('handleSelect', item)
     }
   }
 }
