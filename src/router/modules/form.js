@@ -10,7 +10,7 @@ const formRouter = {
   },
   children: [
     {
-      path: 'simple-form',
+      path: 'simple-form/:id(\\d+)?',
       // 注意这里书写顺序不能交换
       component: () => import('@/views/form/simpleForm/index'),
       name: 'SimpleForm',

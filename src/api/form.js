@@ -20,3 +20,11 @@ export function submitCustomComponentsForm(form) {
     data
   })
 }
+
+export function fetchSimpleForm(id) {
+  const serverURL = process.env.API_URL
+  return request({
+    url: serverURL + '/form/detail/' + id,
+    method: 'get'
+  })
+}

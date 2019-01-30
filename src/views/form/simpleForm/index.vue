@@ -22,7 +22,7 @@
         </el-col>
       </el-form-item>
       <el-form-item label="即时配送">
-        <el-switch v-model="simpleForm.delivery"></el-switch>
+        <el-switch v-model="simpleForm.delivery" :active-value="1" :inactive-value="0"></el-switch>
       </el-form-item>
       <el-form-item label="活动性质">
         <el-checkbox-group v-model="simpleForm.type">
@@ -34,8 +34,8 @@
       </el-form-item>
       <el-form-item label="特殊资源">
         <el-radio-group v-model="simpleForm.resource">
-          <el-radio label="1">线上品牌商赞助</el-radio>
-          <el-radio label="2">线下场地免费</el-radio>
+          <el-radio :label="1">线上品牌商赞助</el-radio>
+          <el-radio :label="2">线下场地免费</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="活动省市">
@@ -56,7 +56,7 @@
 </template>
 
 <script>
-  import {submitSimpleForm} from '@/api/form'
+  import {submitSimpleForm, fetchSimpleForm} from '@/api/form'
   import ChinaAreasSelect from '@/components/ChinaAreasSelect'
 
   export default {
@@ -69,7 +69,7 @@
           region: '',
           date1: '',
           date2: '',
-          delivery: false,
+          delivery: '',
           type: [],
           resource: '',
           desc: '',
@@ -84,20 +84,36 @@
         }
       }
     },
+    created() {
+      if (this.$route.params && this.$route.params.id) {
+        const id = this.$route.params && this.$route.params.id;
+        this.fetchFormData(id)
+      }
+    },
     methods: {
+      fetchFormData(id) {
+        new Promise((resolve, reject) => {
+          fetchSimpleForm(id).then(response => {
+            this.simpleForm = response.data;
+            resolve()
+          }).catch(err => {
+            reject(err)
+          })
+        })
+      },
       handleSimpleForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.loading = true
+            this.loading = true;
             //整理数据
-            this.simpleForm.type = JSON.stringify(this.simpleForm.type)
+            this.simpleForm.type = JSON.stringify(this.simpleForm.type);
             //开始提交表单
             new Promise((resolve, reject) => {
               submitSimpleForm(this.simpleForm).then(response => {
-                console.log('onSubmit')
+                console.log('onSubmit');
                 resolve()
-              }).catch(error => {
-                reject(error)
+              }).catch(err => {
+                reject(err)
               })
             })
           }

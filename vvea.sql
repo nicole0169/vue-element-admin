@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50150
 File Encoding         : 65001
 
-Date: 2019-01-28 17:48:09
+Date: 2019-01-30 17:30:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -23,8 +23,8 @@ CREATE TABLE `tdf_actives` (
   `active_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
   `active_title` varchar(200) NOT NULL DEFAULT '',
   `active_area` varchar(200) NOT NULL DEFAULT '',
-  `active_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `active_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `active_date` date NOT NULL DEFAULT '0000-00-00',
+  `active_time` time NOT NULL DEFAULT '00:00:00',
   `active_delivery` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `active_tags` varchar(200) NOT NULL DEFAULT '',
   `active_special` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -35,18 +35,31 @@ CREATE TABLE `tdf_actives` (
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `active_status` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`active_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tdf_actives
 -- ----------------------------
-INSERT INTO `tdf_actives` VALUES ('1', 'abc', 'shanghai', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', '', '0', '', '', '', '2019-01-28 15:44:15', '2019-01-28 15:44:15', '0');
-INSERT INTO `tdf_actives` VALUES ('2', 'abc', 'shanghai', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', '', '0', '', '', '', '2019-01-28 15:45:46', '2019-01-28 15:45:46', '0');
-INSERT INTO `tdf_actives` VALUES ('3', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:16:03', '2019-01-28 16:16:03', '0');
-INSERT INTO `tdf_actives` VALUES ('4', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:17:13', '2019-01-28 16:17:13', '0');
-INSERT INTO `tdf_actives` VALUES ('5', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:19:51', '2019-01-28 16:19:51', '0');
-INSERT INTO `tdf_actives` VALUES ('6', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:34:56', '2019-01-28 16:34:56', '0');
-INSERT INTO `tdf_actives` VALUES ('7', '', '', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:36:49', '2019-01-28 16:36:49', '0');
+INSERT INTO `tdf_actives` VALUES ('1', 'abc', 'shanghai', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-28 15:44:15', '2019-01-28 15:44:15', '0');
+INSERT INTO `tdf_actives` VALUES ('2', 'abc', 'shanghai', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-28 15:45:46', '2019-01-28 15:45:46', '0');
+INSERT INTO `tdf_actives` VALUES ('3', '', '', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:16:03', '2019-01-28 16:16:03', '0');
+INSERT INTO `tdf_actives` VALUES ('4', '', '', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:17:13', '2019-01-28 16:17:13', '0');
+INSERT INTO `tdf_actives` VALUES ('5', '', '', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:19:51', '2019-01-28 16:19:51', '0');
+INSERT INTO `tdf_actives` VALUES ('6', '', '', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:34:56', '2019-01-28 16:34:56', '0');
+INSERT INTO `tdf_actives` VALUES ('7', '', '', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-28 16:36:49', '2019-01-28 16:36:49', '0');
+INSERT INTO `tdf_actives` VALUES ('8', '', '', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-29 10:59:30', '2019-01-29 10:59:30', '0');
+INSERT INTO `tdf_actives` VALUES ('9', '', '', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-29 11:04:52', '2019-01-29 11:04:52', '0');
+INSERT INTO `tdf_actives` VALUES ('10', '', '', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-29 13:11:37', '2019-01-29 13:11:37', '0');
+INSERT INTO `tdf_actives` VALUES ('11', '', '', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-29 13:19:23', '2019-01-29 13:19:23', '0');
+INSERT INTO `tdf_actives` VALUES ('12', 'abc', 'shanghai', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-29 13:31:29', '2019-01-29 13:31:29', '0');
+INSERT INTO `tdf_actives` VALUES ('13', 'abc', 'shanghai', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-29 13:32:47', '2019-01-29 13:32:47', '0');
+INSERT INTO `tdf_actives` VALUES ('14', 'abc', 'shanghai', '0000-00-00', '00:00:00', '0', '', '0', '', '', '', '2019-01-29 14:07:25', '2019-01-29 14:07:25', '0');
+INSERT INTO `tdf_actives` VALUES ('15', 'abc', 'beijing', '2019-01-29', '15:43:08', '1', 'Array', '1', '310104', '', '', '2019-01-29 15:43:20', '2019-01-29 15:43:20', '0');
+INSERT INTO `tdf_actives` VALUES ('16', 'abc', 'beijing', '2019-01-29', '15:47:35', '0', 'Array', '2', '310104', '', '', '2019-01-29 15:47:50', '2019-01-29 15:47:50', '0');
+INSERT INTO `tdf_actives` VALUES ('17', 'abc', '', '2019-01-29', '16:47:13', '0', 'true', '2', '', '', '', '2019-01-29 16:48:45', '2019-01-29 16:48:45', '0');
+INSERT INTO `tdf_actives` VALUES ('18', 'abc', 'beijing', '2019-01-29', '16:49:14', '1', '[\"1\",\"3\"]', '1', '110101', 'ttt', '', '2019-01-29 16:49:27', '2019-01-29 16:49:27', '0');
+INSERT INTO `tdf_actives` VALUES ('19', 'D大调', 'shanghai', '2019-01-30', '16:00:50', '1', '[\"1\",\"4\"]', '2', '310104', '弹道导弹核潜艇', '110101', '2019-01-30 16:01:12', '2019-01-30 16:01:12', '0');
+INSERT INTO `tdf_actives` VALUES ('20', 'D大调', 'beijing', '2019-01-30', '17:06:36', '1', '[\"1\",\"4\",\"3\"]', '1', '120102', '多发发发大沙发沙发', '360101', '2019-01-30 17:06:56', '2019-01-30 17:06:56', '0');
 
 -- ----------------------------
 -- Table structure for `tdf_admin_users`
