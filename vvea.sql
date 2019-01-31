@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50150
 File Encoding         : 65001
 
-Date: 2019-01-31 17:30:13
+Date: 2019-01-31 17:54:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -35,7 +35,7 @@ CREATE TABLE `tdf_actives` (
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `active_status` tinyint(3) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`active_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tdf_actives
@@ -70,6 +70,7 @@ INSERT INTO `tdf_actives` VALUES ('27', 'd', 'shanghai', '2019-01-31', '15:01:05
 INSERT INTO `tdf_actives` VALUES ('28', 'd', 'shanghai', '2019-01-31', '15:01:05', '1', '\"[\\\"2\\\"]\"', '2', '120100', '', '310100', '2019-01-31 15:01:36', '2019-01-31 15:01:36', '0');
 INSERT INTO `tdf_actives` VALUES ('29', 'a', 'shanghai', '2019-01-31', '15:46:17', '1', '[\"1\"]', '2', '110101', '', '120102', '2019-01-31 15:46:43', '2019-01-31 15:46:43', '0');
 INSERT INTO `tdf_actives` VALUES ('30', '啊', 'beijing', '2019-01-31', '17:28:52', '1', '[\"2\"]', '2', '130207', '', '210321', '2019-01-31 17:29:03', '2019-01-31 17:29:03', '0');
+INSERT INTO `tdf_actives` VALUES ('31', '啊', 'beijing', '2019-01-31', '17:47:36', '1', '[\"1\"]', '1', '130406', '', '', '2019-01-31 17:47:49', '2019-01-31 17:47:49', '0');
 
 -- ----------------------------
 -- Table structure for `tdf_admin_users`

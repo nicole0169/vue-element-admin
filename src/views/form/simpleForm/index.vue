@@ -45,7 +45,7 @@
         <el-input type="textarea" v-model="simpleForm.desc"></el-input>
       </el-form-item>
       <el-form-item label="所在省市">
-        <china-areas-select v-model="simpleForm.area2" v-on:handleSelect="getArea2"></china-areas-select>
+        <china-areas-select v-on:handleSelect="getArea2"></china-areas-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click.native.prevent="handleSimpleForm('simpleForm')">立即创建</el-button>
