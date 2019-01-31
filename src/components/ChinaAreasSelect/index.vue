@@ -40,47 +40,72 @@
 </template>
 
 <script>
-import PROVINCES from './assets/provinces'
-import CITIES from './assets/cities'
-import AREAS from './assets/areas'
+  import PROVINCES from './assets/provinces'
+  import CITIES from './assets/cities'
+  import AREAS from './assets/areas'
 
-export default {
-  name: 'ChinaAreasSelect',
-  props: {
-    value: {
-      type: String,
-      default: ''
-    }
-  },
-  data() {
-    return {
-      inputProvince: '',
-      inputCity: '',
-      inputArea: '',
-      provinces: [],
-      cities: [],
-      areas: []
-    }
-  },
-  mounted() {
-    this.provinces = this.loadAll()
-  },
-  methods: {
-    handleSelect(item) {
-      if (CITIES[item]) {
-        this.inputCity = ''
-        this.inputArea = ''
-        this.areas = []
-        this.cities = CITIES[item]
-      } else if (AREAS[item]) {
-        this.inputArea = ''
-        this.areas = AREAS[item]
+  export default {
+    name: 'ChinaAreasSelect',
+    props: {
+      value: {
+        type: String,
+        default: ''
       }
-      this.$emit('handleSelect', item)
     },
-    loadAll() {
-      return PROVINCES
+    data() {
+      return {
+        inputProvince: '',
+        inputCity: '',
+        inputArea: '',
+        provinces: [],
+        cities: [],
+        areas: [],
+        defaultProvince: '',
+        defaultCity: '',
+        defaultArea: '',
+        returnData: []
+      }
+    },
+    created() {
+
+    },
+    mounted() {
+      this.provinces = this.loadAll();
+      this.setDefault();
+    },
+    methods: {
+      handleSelect(item) {
+        if (CITIES[item]) {
+          this.inputCity = '';
+          this.inputArea = '';
+          this.areas = [];
+          this.cities = CITIES[item]
+        } else if (AREAS[item]) {
+          this.inputArea = '';
+          this.areas = AREAS[item]
+        }
+        this.returnData.push(item);
+        console.log(this.returnData);
+        this.$emit('handleSelect', JSON.stringify(this.returnData))
+      },
+      loadAll() {
+        return PROVINCES;
+      },
+      setDefault() {
+        if (this.defaultProvince) {
+          this.inputProvince = this.defaultProvince;
+          this.cities = CITIES[this.inputProvince];
+        }
+
+        if (this.defaultCity) {
+          this.inputCity = this.defaultCity;
+          this.areas = AREAS[this.inputCity];
+        }
+
+        if (this.defaultArea) {
+          this.inputArea = this.defaultArea;
+        }
+      }
     }
   }
-}
 </script>
