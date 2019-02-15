@@ -39,13 +39,13 @@
         </el-radio-group>
       </el-form-item>
       <el-form-item label="活动省市">
-        <china-areas-select v-model="simpleForm.area"></china-areas-select>
+        <china-areas-select @handleSelect="getArea" :default="simpleForm.area"></china-areas-select>
       </el-form-item>
       <el-form-item label="活动形式">
         <el-input type="textarea" v-model="simpleForm.desc"></el-input>
       </el-form-item>
       <el-form-item label="所在省市">
-        <china-areas-select v-on:handleSelect="getArea2"></china-areas-select>
+        <china-areas-select v-on:handleSelect="getArea2" :default="simpleForm.area2"></china-areas-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click.native.prevent="handleSimpleForm('simpleForm')">立即创建</el-button>
@@ -71,6 +71,7 @@
           date2: '',
           delivery: '',
           type: [],
+          type_json: '',
           resource: '',
           desc: '',
           area: '',
@@ -91,14 +92,24 @@
       }
     },
     methods: {
-      getArea2(val) {
-        console.log(val);
+      getArea(val) {
+        //console.log('Get Area1 return Data: ' + val);
+        this.$set(this.simpleForm, 'area', val);
       },
-
+      getArea2(val) {
+        //console.log('Get Area2 return Data: ' + val);
+        this.$set(this.simpleForm, 'area2', val);
+      },
       fetchFormData(id) {
         new Promise((resolve, reject) => {
           fetchSimpleForm(id).then(response => {
-            this.simpleForm = response.data;
+            //console.log(response.data);
+            for (let key in response.data) {
+              this.$set(this.simpleForm, key, response.data[key]);
+            }
+            this.$set(this.simpleForm, 'area', response.data.active_ssq);
+            this.$set(this.simpleForm, 'area2', response.data.active_belong_ssq);
+            this.$set(this.simpleForm, 'type', JSON.parse(response.data.type_json));
             resolve()
           }).catch(err => {
             reject(err)
@@ -110,7 +121,7 @@
           if (valid) {
             this.loading = true;
             //整理数据
-            this.simpleForm.type = JSON.stringify(this.simpleForm.type);
+            this.$set(this.simpleForm, 'type_json', JSON.stringify(this.simpleForm.type));
             //开始提交表单
             new Promise((resolve, reject) => {
               submitSimpleForm(this.simpleForm).then(response => {

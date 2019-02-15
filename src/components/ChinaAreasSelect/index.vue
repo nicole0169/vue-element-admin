@@ -48,8 +48,10 @@
     name: 'ChinaAreasSelect',
     props: {
       value: {
-        type: String,
-        default: ''
+        type: String
+      },
+      default: {
+        type: String
       }
     },
     data() {
@@ -71,10 +73,29 @@
     },
     mounted() {
       this.provinces = this.loadAll();
-      this.setDefault();
+    },
+    watch: {
+      default(curVal, oldVal) {
+        if (curVal) {
+          //console.log('WATCHING curVal default: ');
+          //console.log(curVal);
+          //set Default
+          let defaultJsonStr = curVal;
+
+          let defaultObj = JSON.parse(defaultJsonStr);
+
+          this.defaultProvince = defaultObj.shift();
+          this.defaultCity = defaultObj.shift();
+          this.defaultArea = defaultObj.shift();
+
+          this.setDefault();
+        }
+      },
     },
     methods: {
       handleSelect(item) {
+        this.returnData = [];
+
         if (CITIES[item]) {
           this.inputCity = '';
           this.inputArea = '';
@@ -84,8 +105,11 @@
           this.inputArea = '';
           this.areas = AREAS[item]
         }
-        this.returnData.push(item);
-        console.log(this.returnData);
+
+        this.returnData.push(this.inputProvince);
+        this.returnData.push(this.inputCity);
+        this.returnData.push(this.inputArea);
+
         this.$emit('handleSelect', JSON.stringify(this.returnData))
       },
       loadAll() {
