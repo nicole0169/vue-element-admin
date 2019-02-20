@@ -4,27 +4,31 @@
       <el-form-item label="活动名称" prop="name">
         <el-input v-model="simpleForm.name"></el-input>
       </el-form-item>
-      <el-form-item label="活动区域">
+      <el-form-item label="活动区域" prop="region">
         <el-select v-model="simpleForm.region" placeholder="请选择活动区域">
           <el-option label="区域一" value="shanghai"></el-option>
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="活动时间">
+      <el-form-item label="活动时间" required>
         <el-col :span="11">
-          <el-date-picker type="date" v-model="simpleForm.date1" placeholder="选择日期"
-                          style="width: 100%;" value-format="yyyy-MM-dd"></el-date-picker>
+          <el-form-item prop="date1">
+            <el-date-picker type="date" v-model="simpleForm.date1" placeholder="选择日期"
+                            style="width: 100%;" value-format="yyyy-MM-dd"></el-date-picker>
+          </el-form-item>
         </el-col>
         <el-col class="line" :span="2">-</el-col>
         <el-col :span="11">
-          <el-time-picker type="fixed-time" v-model="simpleForm.date2" placeholder="选择时间"
-                          style="width: 100%;" value-format="HH:mm:ss"></el-time-picker>
+          <el-form-item prop="date2">
+            <el-time-picker type="fixed-time" v-model="simpleForm.date2" placeholder="选择时间"
+                            style="width: 100%;" value-format="HH:mm:ss"></el-time-picker>
+          </el-form-item>
         </el-col>
       </el-form-item>
-      <el-form-item label="即时配送">
+      <el-form-item label="即时配送" prop="delivery">
         <el-switch v-model="simpleForm.delivery" :active-value="1" :inactive-value="0"></el-switch>
       </el-form-item>
-      <el-form-item label="活动性质">
+      <el-form-item label="活动性质" prop="type">
         <el-checkbox-group v-model="simpleForm.type">
           <el-checkbox label="1" name="type">美食/餐厅线上活动</el-checkbox>
           <el-checkbox label="2" name="type">地推活动</el-checkbox>
@@ -32,20 +36,20 @@
           <el-checkbox label="4" name="type">单纯品牌曝光</el-checkbox>
         </el-checkbox-group>
       </el-form-item>
-      <el-form-item label="特殊资源">
+      <el-form-item label="特殊资源" prop="resource">
         <el-radio-group v-model="simpleForm.resource">
           <el-radio :label="1">线上品牌商赞助</el-radio>
           <el-radio :label="2">线下场地免费</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="活动省市">
+      <el-form-item label="活动省市" prop="area">
         <china-areas-select @handleSelect="getArea" :default="simpleForm.area"></china-areas-select>
       </el-form-item>
       <el-form-item label="活动形式">
         <el-input type="textarea" v-model="simpleForm.desc"></el-input>
       </el-form-item>
-      <el-form-item label="所在省市">
-        <china-areas-select v-on:handleSelect="getArea2" :default="simpleForm.area2"></china-areas-select>
+      <el-form-item label="所在省市" prop="area2">
+        <china-areas-select @handleSelect="getArea2" :default="simpleForm.area2"></china-areas-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click.native.prevent="handleSimpleForm('simpleForm')">立即创建</el-button>
@@ -81,6 +85,27 @@
         rules: {
           name: [
             {required: true, message: '请输入活动名称', trigger: 'blur'}
+          ],
+          region: [
+            {required: true, message: '请输入活动区域', trigger: 'blur'}
+          ],
+          date1: [
+            {required: true, message: '请选择活动日期', trigger: 'blur'}
+          ],
+          date2: [
+            {required: true, message: '请选择活动时间', trigger: 'blur'}
+          ],
+          type: [
+            {required: true, message: '请至少选择一项活动', trigger: 'blur'}
+          ],
+          resource: [
+            {required: true, message: '请选择特殊资源', trigger: 'blur'}
+          ],
+          area: [
+            {required: true, message: '请选择活动省市', trigger: 'blur'}
+          ],
+          area2: [
+            {required: true, message: '请选择所在省市', trigger: 'blur'}
           ]
         }
       }

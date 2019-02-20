@@ -2,9 +2,7 @@
   <div>
     <el-select
       v-model="inputProvince"
-      v-bind="$attrs"
       placeholder="请选择省份"
-      v-on="$listeners"
       @change="handleSelect">
       <el-option
         v-for="item in provinces"
@@ -14,9 +12,7 @@
     </el-select>
     <el-select
       v-model="inputCity"
-      v-bind="$attrs"
       placeholder="请选择城市"
-      v-on="$listeners"
       @change="handleSelect">
       <el-option
         v-for="item in cities"
@@ -26,9 +22,7 @@
     </el-select>
     <el-select
       v-model="inputArea"
-      v-bind="$attrs"
       placeholder="请选择区县"
-      v-on="$listeners"
       @change="handleSelect">
       <el-option
         v-for="item in areas"
@@ -75,7 +69,7 @@
       this.provinces = this.loadAll();
     },
     watch: {
-      default(curVal, oldVal) {
+      default: function(curVal, oldVal) {
         if (curVal) {
           //console.log('WATCHING curVal default: ');
           //console.log(curVal);
@@ -90,7 +84,7 @@
 
           this.setDefault();
         }
-      },
+      }
     },
     methods: {
       handleSelect(item) {
