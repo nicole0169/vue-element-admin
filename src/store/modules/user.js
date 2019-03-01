@@ -1,5 +1,5 @@
 import { loginByUsername, logout, getUserInfo } from '@/api/login'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, getAccessToken, setAccessToken, removeAccessToken } from '@/utils/auth'
 
 const user = {
   state: {
@@ -51,9 +51,16 @@ const user = {
       console.log(username)
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
-          const data = response.data
-          commit('SET_TOKEN', data.token)
-          setToken(response.data.token)
+          const data = response.data;
+          console.log('Login response: ');
+          console.log(response.data);
+          commit('SET_TOKEN', data.token);
+          setToken(response.data.token);
+          //local storage set jwt
+          //auth0官方不建议将token直接存放在localstorage中
+          //localStorage.setItem('jwt', data.jwt);
+          setAccessToken(data.jwt);
+
           resolve()
         }).catch(error => {
           reject(error)

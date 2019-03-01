@@ -137,6 +137,7 @@
             this.$set(this.simpleForm, 'type', JSON.parse(response.data.type_json));
             resolve()
           }).catch(err => {
+            console.log('handle error.');
             reject(err)
           })
         })

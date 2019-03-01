@@ -2,6 +2,8 @@ import axios from 'axios'
 import { Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
+import jwt from 'jsonwebtoken'
+import {getAccessToken} from "./auth";
 
 // create an axios instance
 const service = axios.create({
@@ -18,6 +20,15 @@ service.interceptors.request.use(
       // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
       config.headers['X-Token'] = getToken()
     }
+
+    //testing add jwt
+    /*if (localStorage.getItem('jwt')){
+      const token = localStorage.getItem('jwt');
+      config.headers['Authorization'] = 'Bearer ' + token;
+    }*/
+    const token = getAccessToken();
+    config.headers['Authorization'] = 'Bearer ' + token;
+
     return config
   },
   error => {
@@ -64,6 +75,7 @@ service.interceptors.response.use(
   //   }
   // },
   error => {
+    // 如果jwt过期可以在这里处理后续事宜
     console.log('err' + error) // for debug
     Message({
       message: error.message,
