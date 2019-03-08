@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50150
 File Encoding         : 65001
 
-Date: 2019-03-01 10:23:04
+Date: 2019-03-08 17:22:27
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -115,3 +115,49 @@ CREATE TABLE `tdf_admin_users` (
 -- ----------------------------
 INSERT INTO `tdf_admin_users` VALUES ('1', 'admin', '123456');
 INSERT INTO `tdf_admin_users` VALUES ('2', 'editor', '123456');
+
+-- ----------------------------
+-- Table structure for `tdf_articles`
+-- ----------------------------
+DROP TABLE IF EXISTS `tdf_articles`;
+CREATE TABLE `tdf_articles` (
+  `article_id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `article_title` varchar(200) NOT NULL,
+  `article_timestamp` datetime NOT NULL,
+  `article_author` varchar(200) NOT NULL,
+  `article_reviewer` varchar(200) NOT NULL DEFAULT '',
+  `article_content_short` text,
+  `article_content` text,
+  `article_forecast` decimal(10,2) NOT NULL DEFAULT '0.00',
+  `article_importance` tinyint(3) NOT NULL DEFAULT '1',
+  `article_type` varchar(20) NOT NULL DEFAULT '',
+  `article_status` varchar(20) NOT NULL DEFAULT '',
+  `article_display_time` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `article_comment_disabled` tinyint(3) NOT NULL DEFAULT '0',
+  `article_pageviews` int(10) NOT NULL DEFAULT '0',
+  `article_image_uri` varchar(200) NOT NULL DEFAULT '',
+  `article_platforms` tinyint(3) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  PRIMARY KEY (`article_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tdf_articles
+-- ----------------------------
+INSERT INTO `tdf_articles` VALUES ('1', 'Understanding JavaScript Promises', '2019-03-04 14:26:49', 'admin', 'admin', '我是测试数据', '我是测试数据', '8.10', '1', 'CN', 'published', '2019-03-04 14:27:30', '1', '4522', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `tdf_articles` VALUES ('2', 'Vue 组件 data 为什么必须是函数？', '2019-03-04 14:30:15', 'admin', 'admin', '我是测试数据', '我是测试数据', '8.20', '2', 'CN', 'draft', '2019-03-04 14:31:15', '1', '78414', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `tdf_articles` VALUES ('3', '浅谈Vue组件在实际项目中的应用', '2019-03-04 15:28:38', 'admin', 'admin', '我是测试数据', '我是测试数据', '7.40', '2', 'US', 'published', '2019-03-04 15:29:00', '1', '452', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `tdf_articles` VALUES ('4', '基于Token的WEB后台认证机制', '2019-03-04 17:09:01', 'admin', 'admin', '我是测试数据', '我是测试数据', '7.60', '1', 'EU', 'published', '2019-03-04 17:09:23', '1', '7895', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `tdf_articles` VALUES ('5', 'elementui大型项目中form表单校验总结', '2019-03-04 17:10:19', 'admin', 'admin', '我是测试数据', '我是测试数据', '8.10', '2', 'EU', 'deleted', '2019-03-04 17:10:38', '1', '4562', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `tdf_articles` VALUES ('6', 'Vue表单类的父子组件数据传递', '2019-03-04 17:14:29', 'admin', 'admin', '我是测试数据', '我是测试数据', '9.70', '1', 'CN', 'published', '2019-03-04 17:14:52', '1', '635', '', '1', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+INSERT INTO `tdf_articles` VALUES ('7', 'Laravel5.3中的原生＋查询构造器＋Eloquent ORM 常用整理', '2019-03-08 11:44:08', 'admin', '', null, null, '0.00', '3', 'US', 'published', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 09:44:17', '2019-03-08 09:44:17');
+INSERT INTO `tdf_articles` VALUES ('8', '使用Vuex解决Vue中的身份验证', '2019-03-08 12:15:19', 'admin', '', null, null, '0.00', '2', 'EU', 'published', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 10:15:37', '2019-03-08 10:15:37');
+INSERT INTO `tdf_articles` VALUES ('9', 'Where to Store Tokens', '2019-03-08 11:42:04', 'admin', '', null, null, '0.00', '2', 'EU', 'published', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 11:42:12', '2019-03-08 11:42:12');
+INSERT INTO `tdf_articles` VALUES ('10', 'Please Stop Using Local Storage', '2019-03-08 14:13:07', 'admin', '', null, null, '0.00', '2', 'US', 'published', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 13:13:21', '2019-03-08 13:13:21');
+INSERT INTO `tdf_articles` VALUES ('11', 'Refresh Tokens: When to Use Them and How They Interact with JWTs', '2019-03-08 13:51:46', 'admin', '', null, null, '0.00', '1', 'JP', 'published', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 13:51:57', '2019-03-08 13:51:57');
+INSERT INTO `tdf_articles` VALUES ('12', 'Where to Store your JWTs – Cookies vs HTML5 Web Storage', '2019-03-08 13:53:23', 'admin', '', null, null, '0.00', '2', 'EU', 'draft', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 13:53:35', '2019-03-08 13:53:35');
+INSERT INTO `tdf_articles` VALUES ('13', 'Vue的slot-scope的场景的个人理解', '2019-03-08 14:26:31', 'admin', '', null, null, '0.00', '1', 'US', 'draft', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 14:26:56', '2019-03-08 14:26:56');
+INSERT INTO `tdf_articles` VALUES ('14', 'vue+element-ui+slot-scope或原生实现可编辑表格', '2019-03-08 15:57:20', 'admin', '', null, null, '0.00', '2', 'CN', 'deleted', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 15:57:50', '2019-03-08 15:57:50');
+INSERT INTO `tdf_articles` VALUES ('15', 'vue+element实现表格跨行或跨列合并', '2019-03-08 16:00:38', 'admin', '', null, null, '0.00', '3', 'US', 'published', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 16:00:59', '2019-03-08 16:00:59');
+INSERT INTO `tdf_articles` VALUES ('16', 'element ui 的Notification 跳转', '2019-03-08 16:02:35', 'admin', '', null, null, '0.00', '1', 'JP', 'draft', '0000-00-00 00:00:00', '0', '0', '', '0', '2019-03-08 16:03:04', '2019-03-08 16:03:04');

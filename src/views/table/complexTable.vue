@@ -31,7 +31,7 @@
           <span>{{ scope.row.id }}</span>
         </template>
       </el-table-column>
-      <el-table-column :label="$t('table.date')" width="150px" align="center">
+      <el-table-column :label="$t('table.date')" width="160px" align="center">
         <template slot-scope="scope">
           <span>{{ scope.row.timestamp | parseTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
@@ -91,7 +91,7 @@
           </el-select>
         </el-form-item>
         <el-form-item :label="$t('table.date')" prop="timestamp">
-          <el-date-picker v-model="temp.timestamp" type="datetime" placeholder="Please pick a date"/>
+          <el-date-picker v-model="temp.timestamp" type="datetime" value-format="yyyy-MM-dd HH:mm:ss" placeholder="Please pick a date"/>
         </el-form-item>
         <el-form-item :label="$t('table.title')" prop="title">
           <el-input v-model="temp.title"/>
@@ -151,6 +151,9 @@ export default {
   components: { Pagination },
   directives: { waves },
   filters: {
+    parseTime(timestamp, cFormat) {
+      return parseTime(timestamp, cFormat)
+    },
     statusFilter(status) {
       const statusMap = {
         published: 'success',
@@ -171,11 +174,11 @@ export default {
       listLoading: true,
       listQuery: {
         page: 1,
-        limit: 20,
+        limit: 5,
         importance: undefined,
         title: undefined,
         type: undefined,
-        sort: '+id'
+        sort: '-id'
       },
       importanceOptions: [1, 2, 3],
       calendarTypeOptions,
@@ -186,7 +189,7 @@ export default {
         id: undefined,
         importance: 1,
         remark: '',
-        timestamp: new Date(),
+        timestamp: parseTime(new Date()),
         title: '',
         type: '',
         status: 'published'
@@ -201,7 +204,7 @@ export default {
       pvData: [],
       rules: {
         type: [{ required: true, message: 'type is required', trigger: 'change' }],
-        timestamp: [{ type: 'date', required: true, message: 'timestamp is required', trigger: 'change' }],
+        timestamp: [{ required: true, message: 'timestamp is required', trigger: 'change' }],
         title: [{ required: true, message: 'title is required', trigger: 'blur' }]
       },
       downloadLoading: false
@@ -214,8 +217,8 @@ export default {
     getList() {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
-        this.list = response.data.items
-        this.total = response.data.total
+        this.list = response.data.items.data;
+        this.total = response.data.total;
 
         // Just to simulate the time of the request
         setTimeout(() => {
@@ -253,7 +256,7 @@ export default {
         id: undefined,
         importance: 1,
         remark: '',
-        timestamp: new Date(),
+        timestamp: parseTime(new Date()),
         title: '',
         status: 'published',
         type: ''
@@ -270,10 +273,10 @@ export default {
     createData() {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
-          this.temp.author = 'vue-element-admin'
+          //this.temp.id = parseInt(Math.random() * 100) + 1024 // mock a id
+          this.temp.author = 'admin'
           createArticle(this.temp).then(() => {
-            this.list.unshift(this.temp)
+            //this.list.unshift(this.temp)
             this.dialogFormVisible = false
             this.$notify({
               title: '成功',
@@ -281,6 +284,7 @@ export default {
               type: 'success',
               duration: 2000
             })
+            this.getList()
           })
         }
       })
