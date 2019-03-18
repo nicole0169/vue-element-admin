@@ -10,6 +10,7 @@ import Layout from '@/views/layout/Layout'
 import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
+import treeTableRouter from './modules/tree-table'
 import nestedRouter from './modules/nested'
 
 import formRouter from './modules/form'
@@ -27,13 +28,14 @@ import formRouter from './modules/form'
 * name:'router-name'             the name is used by <keep-alive> (must set!!!)
 * meta : {
     roles: ['admin','editor']    will control the page roles (you can set multiple roles)
-    title: 'title'               the name show in submenu and breadcrumb (recommend set)
+    title: 'title'               the name show in sub-menu and breadcrumb (recommend set)
     icon: 'svg-name'             the icon show in the sidebar
     noCache: true                if true, the page will no be cached(default is false)
     breadcrumb: false            if false, the item will hidden in breadcrumb(default is true)
+    affix: true                  if true, the tag will affix in the tags-view
   }
 **/
-export const constantRouterMap = [
+export const constantRoutes = [
   {
     path: '/redirect',
     component: Layout,
@@ -74,20 +76,19 @@ export const constantRouterMap = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
+        meta: { title: 'dashboard', icon: 'dashboard', noCache: true, affix: true }
       }
     ]
   },
   {
     path: '/documentation',
     component: Layout,
-    redirect: '/documentation/index',
     children: [
       {
         path: 'index',
         component: () => import('@/views/documentation/index'),
         name: 'Documentation',
-        meta: { title: 'documentation', icon: 'documentation', noCache: true }
+        meta: { title: 'documentation', icon: 'documentation', affix: true }
       }
     ]
   },
@@ -109,10 +110,10 @@ export const constantRouterMap = [
 export default new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap
+  routes: constantRoutes
 })
 
-export const asyncRouterMap = [
+export const asyncRoutes = [
   {
     path: '/permission',
     component: Layout,
@@ -141,6 +142,15 @@ export const asyncRouterMap = [
           title: 'directivePermission'
           // if do not set roles, means: this page does not require permission
         }
+      },
+      {
+        path: 'role',
+        component: () => import('@/views/permission/role'),
+        name: 'RolePermission',
+        meta: {
+          title: 'rolePermission',
+          roles: ['admin']
+        }
       }
     ]
   },
@@ -163,6 +173,7 @@ export const asyncRouterMap = [
   chartsRouter,
   nestedRouter,
   tableRouter,
+  treeTableRouter,
 
   formRouter,
 
@@ -273,6 +284,12 @@ export const asyncRouterMap = [
         meta: { title: 'selectExcel' }
       },
       {
+        path: 'export-merge-header',
+        component: () => import('@/views/excel/mergeHeader'),
+        name: 'MergeHeader',
+        meta: { title: 'mergeHeader' }
+      },
+      {
         path: 'upload-excel',
         component: () => import('@/views/excel/uploadExcel'),
         name: 'UploadExcel',
@@ -301,13 +318,12 @@ export const asyncRouterMap = [
     path: '/pdf',
     component: Layout,
     redirect: '/pdf/index',
-    meta: { title: 'PDF', icon: 'pdf' },
     children: [
       {
         path: 'index',
         component: () => import('@/views/pdf/index'),
         name: 'PDF',
-        meta: { title: 'PDF' }
+        meta: { title: 'pdf', icon: 'pdf' }
       }
     ]
   },

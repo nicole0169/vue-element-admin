@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!-- Note that row-key is necessary to get a correct row order. -->
-    <el-table v-loading="listLoading" :data="list" row-key="id" border fit highlight-current-row style="width: 100%">
+    <el-table ref="dragTable" v-loading="listLoading" :data="list" row-key="id" border fit highlight-current-row style="width: 100%">
 
       <el-table-column align="center" label="ID" width="65">
         <template slot-scope="scope">
@@ -29,7 +29,7 @@
 
       <el-table-column width="100px" label="Importance">
         <template slot-scope="scope">
-          <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star" class="icon-star"/>
+          <svg-icon v-for="n in +scope.row.importance" :key="n" icon-class="star" class="icon-star" />
         </template>
       </el-table-column>
 
@@ -46,8 +46,8 @@
       </el-table-column>
 
       <el-table-column align="center" label="Drag" width="80">
-        <template slot-scope="scope">
-          <svg-icon class="drag-handler" icon-class="drag"/>
+        <template slot-scope="{}">
+          <svg-icon class="drag-handler" icon-class="drag" />
         </template>
       </el-table-column>
 
@@ -107,7 +107,7 @@ export default {
       })
     },
     setSort() {
-      const el = document.querySelectorAll('.el-table__body-wrapper > table > tbody')[0]
+      const el = this.$refs.dragTable.$el.querySelectorAll('.el-table__body-wrapper > table > tbody')[0]
       this.sortable = Sortable.create(el, {
         ghostClass: 'sortable-ghost', // Class name for the drop placeholder,
         setData: function(dataTransfer) {
