@@ -23,6 +23,9 @@ import * as filters from './filters' // global filters
 
 import {foobar} from './foobar'
 
+//import {deepClone} from '@/utils'
+//import {constantRoutes, asyncRoutes} from "@/router";
+
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
@@ -44,6 +47,11 @@ new Vue({
     console.log('main.js created ')
 
     foobar(...[1,3,5]);
+
+    /*console.log(constantRoutes);
+    console.log(asyncRoutes);
+    const routes = deepClone([...constantRoutes, ...asyncRoutes]);
+    console.log(routes);*/
   },
   render: h => h(App)
 })

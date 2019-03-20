@@ -16,7 +16,7 @@ export function getRoles() {
 
 export function deleteRole(id) {
   return request({
-    url: `/roles/${id}`,
+    url: '/roles/${id}',
     method: 'delete'
   })
 }
@@ -31,7 +31,7 @@ export function addRole(data) {
 
 export function updateRole(key, data) {
   return request({
-    url: `/roles/${key}`,
+    url: '/roles/${key}',
     method: 'put',
     data
   })

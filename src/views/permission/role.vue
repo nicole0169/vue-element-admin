@@ -49,7 +49,10 @@
 <script>
 import path from 'path'
 import { deepClone } from '@/utils'
-import { getRoutes, getRoles, addRole, deleteRole, updateRole } from '@/api/role'
+import {constantRoutes, asyncRoutes} from "@/router";
+//import { getRoutes, getRoles, addRole, deleteRole, updateRole } from '@/api/role'
+import { getRoles, addRole, deleteRole, updateRole } from '@/api/role'
+import { filterAsyncRoutes } from '@/store/modules/permission'
 import i18n from '@/lang'
 
 const defaultRole = {
@@ -85,15 +88,47 @@ export default {
     this.getRoles()
   },
   methods: {
-    async getRoutes() {
-      const res = await getRoutes()
-      this.serviceRoutes = res.data
-      const routes = this.generateRoutes(res.data)
-      this.routes = this.i18n(routes)
+    getRoutes() {
+      //const res = await getRoutes()
+      const res = deepClone([...constantRoutes,...asyncRoutes]);
+      this.serviceRoutes = res;
+      const routes = this.generateRoutes(res);
+      this.routes = this.i18n(routes);
     },
-    async getRoles() {
-      const res = await getRoles()
-      this.rolesList = res.data
+    getRoles() {
+      //const res = await getRoles()
+      const mock_roles = [
+        {
+          key: 'admin',
+          name: 'admin',
+          description: 'Super Administrator. Have access to view all pages.',
+          routes: this.routes
+        },
+        {
+          key: 'editor',
+          name: 'editor',
+          description: 'Normal Editor. Can see all pages except permission page',
+          routes: filterAsyncRoutes(this.routes, ['editor'])
+        },
+        {
+          key: 'visitor',
+          name: 'visitor',
+          description: 'Just a visitor. Can only see the home page and the document page',
+          routes: [{
+            path: '',
+            redirect: 'dashboard',
+            children: [
+              {
+                path: 'dashboard',
+                name: 'Dashboard',
+                meta: { title: 'dashboard', icon: 'dashboard' }
+              }
+            ]
+          }]
+        }
+      ];
+      const res = mock_roles;
+      this.rolesList = res;
     },
     i18n(routes) {
       const app = routes.map(route => {

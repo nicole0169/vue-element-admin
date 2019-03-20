@@ -29,6 +29,14 @@ module.exports = {
       '/article': {
         target: 'http://localhost:8080',
         changeOrigin: true
+      },
+      '/routes': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
+      },
+      '/roles': {
+        target: 'http://localhost:8080',
+        changeOrigin: true
       }
     },
 
