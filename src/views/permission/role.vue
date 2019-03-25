@@ -79,6 +79,7 @@ export default {
   },
   computed: {
     routesData() {
+      console.log('assignment routes data');
       return this.routes
     }
   },
@@ -93,6 +94,7 @@ export default {
       const res = deepClone([...constantRoutes,...asyncRoutes]);
       this.serviceRoutes = res;
       const routes = this.generateRoutes(res);
+      console.log(routes);
       this.routes = this.i18n(routes);
     },
     getRoles() {
