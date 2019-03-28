@@ -243,6 +243,8 @@ export default {
       this.role.routes = this.generateTree(deepClone(this.serviceRoutes), '/', checkedKeys)
 
       if (isEdit) {
+        console.log(this.role.key);
+        console.log(this.role);
         await updateRole(this.role.key, this.role)
         for (let index = 0; index < this.rolesList.length; index++) {
           if (this.rolesList[index].key === this.role.key) {

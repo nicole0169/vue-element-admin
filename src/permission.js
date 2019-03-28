@@ -18,6 +18,7 @@ const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
 
 router.beforeEach((to, from, next) => {
   console.log('router.beforeEach working...');
+  //console.log(to);
   NProgress.start() // start progress bar
   if (getToken()) {
     // determine if there has token

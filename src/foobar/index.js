@@ -3,3 +3,9 @@ export function foobar() {
     console.log(arguments[i]);
   }
 }
+
+export default function ddf() {
+  console.log('It is default Foobar.');
+}
+
+console.log('import and run...');
